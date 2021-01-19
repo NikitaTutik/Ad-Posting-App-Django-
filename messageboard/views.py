@@ -1,4 +1,5 @@
-from django.shortcuts import render,redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from api.models import Ad
 from .forms import AdForm
 
@@ -9,6 +10,7 @@ def index(request):
     return render(request, 'messageboard/mainpage.html', context)
 
 
+@login_required
 def add_ad(request, id=0):
     if request.method == "GET":
         if id == 0:
@@ -28,7 +30,12 @@ def add_ad(request, id=0):
             return redirect('index')
 
 
+@login_required
 def delete_ad(request):
+    def test_func(self):
+        ad = self.get_object()
+        if self.request.user == ad.author:
+            return True
+        return False
     return
-
 
