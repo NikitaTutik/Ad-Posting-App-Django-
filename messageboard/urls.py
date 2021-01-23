@@ -6,6 +6,6 @@ urlpatterns = [
     path('', index, name='index'),
     path('add/', add_ad, name='add'),
     path('<int:id>/', add_ad, name='update'),
-    path('<int:id>/', delete_ad, name='delete')
+    path('delete/<int:id>/', delete_ad, name='delete')
 ]
 

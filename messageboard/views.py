@@ -26,16 +26,15 @@ def add_ad(request, id=0):
             ad = Ad.objects.get(pk=id)
             form = AdForm(request.POST, instance=ad)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.author = request.user
             form.save()
             return redirect('index')
 
 
 @login_required
-def delete_ad(request):
-    def test_func(self):
-        ad = self.get_object()
-        if self.request.user == ad.author:
-            return True
-        return False
-    return
+def delete_ad(request, id):
+    ad = Ad.objects.get(pk=id)
+    ad.delete()
+    return redirect('index')
 
