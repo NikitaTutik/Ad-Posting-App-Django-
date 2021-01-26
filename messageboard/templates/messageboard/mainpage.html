@@ -6,7 +6,8 @@
         {{ ad.text }} <br>
         Call: {{ ad.phone_number  }} <br>
         Published on: {{ ad.date_published }} <br>
-        Published by: {{ ad.author }}
+        Published by: {{ ad.author }}<br>
+        Category: {{ ad.ad_category }}
         <div class="row">
         {% if user.is_authenticated %}
             {% if ad.author == user %}
