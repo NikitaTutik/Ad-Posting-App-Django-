@@ -5,7 +5,7 @@ from .forms import AdForm
 
 
 def index(request):
-    form = Ad.objects.all()
+    form = Ad.objects.order_by('-date_published')
     context = {'form': form}
     return render(request, 'messageboard/mainpage.html', context)
 
