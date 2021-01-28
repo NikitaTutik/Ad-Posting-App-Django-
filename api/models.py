@@ -21,9 +21,4 @@ class Ad(models.Model):
 
     def __str__(self):
         return self.title
-    
-    def __int__(self, args, **kwargs):
-        kwargs['phone_number'] = 11
-        super().__init__(*args, **kwargs)
-
 
