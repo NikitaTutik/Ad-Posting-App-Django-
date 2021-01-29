@@ -2,11 +2,14 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from api.models import Ad
 from .forms import AdForm
+from . filters import AdFilter
 
 
 def index(request):
     form = Ad.objects.order_by('-date_published')
-    context = {'form': form}
+    filter = AdFilter(request.GET, queryset=form)
+    form = filter.qs
+    context = {'form': form, 'filter': filter}
     return render(request, 'messageboard/mainpage.html', context)
 
 

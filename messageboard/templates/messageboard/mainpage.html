@@ -1,6 +1,10 @@
 {% extends 'messageboard/base.html' %}
 
 {% block content %}
+    <form method="get">
+        {{ filter.form }}
+        <button type="submit">Search</button>
+    </form>
     {% for ad in form %}
         <h2>{{ ad.title }}<br></h2>
         {{ ad.text }} <br>
