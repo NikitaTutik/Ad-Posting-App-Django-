@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 AD_CATEGORIES = (
     ('Automotive', 'Automotive'),
     ('Utilities', 'Utilities'),
@@ -21,4 +20,3 @@ class Ad(models.Model):
 
     def __str__(self):
         return self.title
-
