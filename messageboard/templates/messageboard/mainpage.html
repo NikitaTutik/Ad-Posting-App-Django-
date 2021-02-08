@@ -5,6 +5,21 @@
         {{ filter.form }}
         <button type="submit">Search</button>
     </form>
+    {% if paidad.pinned is False %}
+        <h2> No Pinned Ads </h2>
+        {% endif %}
+        {% if paidad.pinned is True %}
+            <h2>{{ paidad.parent.title }}<br></h2>
+            Call: {{ paidad.parent.phone_number  }} <br>
+            Published on: {{ paidad.parent.date_published }} <br>
+            Published by: {{ paidad.parent.author }}<br>
+            Category: {{ paidad.parent.ad_category }}
+            <div class="hidden"> PINNED AD
+                {% if user.is_superuser %}
+                <a href="{% url 'unpin' pk=paidad.pk %}">Unpin Ad</a>
+            {% endif %}
+            </div>
+        {% endif %}
     {% for ad in form %}
         <h2>{{ ad.title }}<br></h2>
         {{ ad.text }} <br>
@@ -12,9 +27,12 @@
         Published on: {{ ad.date_published }} <br>
         Published by: {{ ad.author }}<br>
         Category: {{ ad.ad_category }}
+        {% if ad.author == user %}
+        <a href="{% url 'pin' ad.id %}">Pin</a>
+        {% endif %}
         <div class="row">
         {% if user.is_authenticated %}
-            {% if ad.author == user %}
+            {% if user.is_superuser or ad.author == user %}
                 <a href="{% url 'update' ad.id %}">Update</a>
                 <a href="{% url 'delete' ad.id %}">Delete</a>
             {% endif %}
