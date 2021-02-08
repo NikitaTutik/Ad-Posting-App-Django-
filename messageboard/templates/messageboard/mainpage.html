@@ -27,7 +27,7 @@
         Published on: {{ ad.date_published }} <br>
         Published by: {{ ad.author }}<br>
         Category: {{ ad.ad_category }}
-        {% if ad.author == user %}
+        {% if user.is_superuser %}
         <a href="{% url 'pin' ad.id %}">Pin</a>
         {% endif %}
         <div class="row">
